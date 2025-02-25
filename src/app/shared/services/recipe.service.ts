@@ -16,7 +16,8 @@ export interface Recipe {
   providedIn: 'root'
 })
 export class RecipeService {
-  private apiUrl = 'http://localhost:5000/api/recipes';
+  // private apiUrl = 'http://localhost:5000/api/recipes';
+  private apiUrl='https://recipe-backend-lgef.onrender.com/api/recipes'
   constructor(private http: HttpClient) {}
 
   // Get all recipes

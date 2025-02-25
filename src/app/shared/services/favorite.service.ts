@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class FavoriteService {
 
-  private apiUrl = 'http://localhost:5000/api/recipes'; // Backend API
+  // private apiUrl = 'http://localhost:5000/api/recipes'; // Backend API
+  private apiUrl='https://recipe-backend-lgef.onrender.com/api/recipes'
 
   constructor(private http: HttpClient) {}
 
