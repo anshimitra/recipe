@@ -1,0 +1,26 @@
+<form (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded-lg p-4">
+  <div class="mb-4">
+    <label class="block text-gray-700">Title</label>
+    <input type="text" [(ngModel)]="recipe.title" name="title" class="w-full p-2 border rounded">
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700">Description</label>
+    <textarea [(ngModel)]="recipe.description" name="description" class="w-full p-2 border rounded"></textarea>
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700">Ingredients</label>
+    <textarea [(ngModel)]="recipe.ingredients" name="ingredients" class="w-full p-2 border rounded"></textarea>
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700">Instructions</label>
+    <textarea [(ngModel)]="recipe.instructions" name="instructions" class="w-full p-2 border rounded"></textarea>
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700">Image</label>
+
+    <input type="file" (change)="onFileChange($event)" accept="image/*" class="w-full p-2 border rounded">
+  </div>
+  <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+    Add Recipe
+  </button>
+</form>

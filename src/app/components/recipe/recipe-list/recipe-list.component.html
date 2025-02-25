@@ -1,0 +1,70 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4">Recipes</h2>
+  <div class="relative w-full max-w-md">
+    <input
+      type="text"
+      placeholder="Search recipes..."
+      class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [(ngModel)]="searchText"
+    />
+    <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+      <svg
+        class="h-5 w-5 text-gray-400"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 18l6-6m0 0l-6-6m6 6H3"
+        />
+      </svg>
+    </div>
+  </div>
+  <div *ngIf="filteredRecipes.length > 0; else noRecipes">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+      <div *ngFor="let recipe of recipes | searchFilter: searchText"
+        [routerLink]="['/recipe', recipe._id]"
+        class="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg transition-shadow relative"
+        role="button"
+        tabindex="0"
+      >
+        <!-- Title + Heart icon -->
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold">{{ recipe.title }}</h3>
+          <span
+            (click)="toggleFavorite(recipe); $event.stopPropagation()"
+            class="text-2xl cursor-pointer"
+            [class.text-red-500]="isFavorite(recipe)"
+            [class.text-gray-400]="!isFavorite(recipe)"
+          >
+            ♥
+          </span>
+        </div>
+
+        <!-- Show 'Added to Favorites' message -->
+        @if (isFavorite(recipe)) {
+          <p class="text-green-600 text-sm mt-1">✔ Added to Favorites!</p>
+        }
+
+        <p class="text-gray-600 h-[35px]">{{ recipe.description }}</p>
+
+        @if (recipe.image) {
+          <img [src]="getImageSrc(recipe.image)"
+               alt="Recipe Image"
+               class="mt-4 mb-4 rounded-lg shadow-md w-full h-[250px]">
+        }
+
+        <div class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          View Recipe
+        </div>
+      </div>
+  </div>
+</div>
+<ng-template #noRecipes>
+  <p class="text-center text-red-500 font-bold">Recipe not found.</p>
+</ng-template>
+</div>

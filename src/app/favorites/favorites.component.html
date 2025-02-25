@@ -1,0 +1,19 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4">Favorite Recipes</h2>
+
+  <div *ngIf="favoriteRecipes.length === 0" class="text-gray-500">
+    No favorite recipes yet.
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div *ngFor="let recipe of favoriteRecipes">
+      <div class="bg-white shadow-md rounded-lg p-4">
+        <h3 class="text-xl font-semibold">{{ recipe._id }}</h3>
+        <button (click)="removeFromFavorites(recipe._id)"
+                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-2">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
