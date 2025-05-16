@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface Recipe {
   _id?: string;
@@ -16,13 +17,11 @@ export interface Recipe {
   providedIn: 'root'
 })
 export class RecipeService {
-  // private apiUrl = 'http://localhost:5000/api/recipes';
-  private apiUrl='https://recipe-backend-lgef.onrender.com/api/recipes'
   constructor(private http: HttpClient) {}
 
   // Get all recipes
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(this.apiUrl).pipe(
+    return this.http.get<Recipe[]>(`${environment.baseUrl}/api/recipes`).pipe(
       catchError(error => {
         console.error('Error fetching recipes:', error);
         return throwError(() => new Error('Failed to fetch recipes.'));
@@ -39,7 +38,7 @@ export class RecipeService {
       headers = headers.set('Content-Type', 'application/json');
     }
 
-    return this.http.post<Recipe>(this.apiUrl, recipe, { headers }).pipe(
+    return this.http.post<Recipe>(`${environment.baseUrl}/api/recipes`, recipe, { headers }).pipe(
       catchError(error => {
         console.error('Error adding recipe:', error);
         return throwError(() => new Error('Failed to add recipe.'));
@@ -59,7 +58,7 @@ export class RecipeService {
   //   );
   // }
   getRecipeById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`${`${environment.baseUrl}/api/recipes`}/${id}`);
   }
 
 }
